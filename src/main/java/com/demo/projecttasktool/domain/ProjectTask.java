@@ -10,6 +10,12 @@ public class ProjectTask {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
+    private Long id;
+
+    private String summary;
+
+    private String acceptanceCriteria;
+
+    private String status;
 
 }
