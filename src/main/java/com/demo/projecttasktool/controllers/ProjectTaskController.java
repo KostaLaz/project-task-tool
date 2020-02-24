@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,7 +25,10 @@ public class ProjectTaskController {
     public ResponseEntity<?> addProjectTaskToBoard(@Valid  @RequestBody ProjectTask projectTask, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             Map<String, String> erorMap = new HashMap<>();
-            for()
+            for(FieldError eror: bindingResult.getFieldErrors()){
+                erorMap.put(eror.getField(), eror.getDefaultMessage());
+            }
+            return new ResponseEntity<Map<String, String>>(erorMap, HttpStatus.BAD_REQUEST);
         }
         ProjectTask newPT = projectTaskService.saveOrUpdateProjectTask(projectTask);
         return new  ResponseEntity<ProjectTask>(newPT, HttpStatus.CREATED);
