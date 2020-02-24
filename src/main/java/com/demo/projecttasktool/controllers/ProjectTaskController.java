@@ -5,9 +5,12 @@ import com.demo.projecttasktool.service.ProjectTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/board")
@@ -18,7 +21,11 @@ public class ProjectTaskController {
     ProjectTaskService projectTaskService;
 
     @PostMapping("")
-    public ResponseEntity<?> addProjectTaskToBoard(@Valid  @RequestBody ProjectTask projectTask){
+    public ResponseEntity<?> addProjectTaskToBoard(@Valid  @RequestBody ProjectTask projectTask, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            Map<String, String> erorMap = new HashMap<>();
+            for()
+        }
         ProjectTask newPT = projectTaskService.saveOrUpdateProjectTask(projectTask);
         return new  ResponseEntity<ProjectTask>(newPT, HttpStatus.CREATED);
 
