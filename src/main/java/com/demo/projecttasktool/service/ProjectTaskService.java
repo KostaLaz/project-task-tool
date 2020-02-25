@@ -32,4 +32,8 @@ public class ProjectTaskService {
         return projectTask;
 
     }
+
+    public void delete(Long id){
+         projectTaskRepository.deleteById(id);
+    }
 }

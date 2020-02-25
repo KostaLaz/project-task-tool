@@ -47,4 +47,12 @@ public class ProjectTaskController {
                           .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id){
+        projectTaskService.delete(id);
+
+        return new ResponseEntity<String>("Project task deleted.", HttpStatus.OK);
+    }
+
+
 }
