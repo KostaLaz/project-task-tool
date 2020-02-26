@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {Link} from "react-router-dom";
+import ProjectTaskItem from './projectTask/ProjectTaskItem';
 
  class ProjectBoard extends Component {
     render() {
@@ -24,26 +25,7 @@ import {Link} from "react-router-dom";
                     {
                     //SAMPLE PROJECT TASK STARTS HERE
                     }
-
-                    <div className="card mb-1 bg-light">
-
-                        <div className="card-header text-primary">
-                            ID: projectSequence
-                        </div>
-                        <div className="card-body bg-light">
-                            <h5 className="card-title">summary</h5>
-                            <p className="card-text text-truncate ">
-                                acceptanceCriteria
-                            </p>
-                            <a href="" className="btn btn-primary">
-                                View / Update
-                            </a>
-
-                            <button className="btn btn-danger ml-4">
-                                Delete
-                            </button>
-                        </div>
-                    </div>
+                        <ProjectTaskItem/>
 
                     {//SAMPLE PROJECT TASK ENDS HERE 
                     }
@@ -54,10 +36,10 @@ import {Link} from "react-router-dom";
                             <h3>In Progress</h3>
                         </div>
                     </div>
-                   { // SAMPLE PROJECT TASK STARTS HERE 
-                   
+                   { // SAMPLE PROJECT TASK STARTS HERE      
                     // SAMPLE PROJECT TASK ENDS HERE
                 }
+                    <ProjectTaskItem/>
                 </div>
                 <div className="col-md-4">
                     <div className="card text-center mb-2">
@@ -68,6 +50,7 @@ import {Link} from "react-router-dom";
                    {/* { <!-- SAMPLE PROJECT TASK STARTS HERE -->
 
                     <!-- SAMPLE PROJECT TASK ENDS HERE -->} */}
+                     <ProjectTaskItem/>
                 </div>
             </div>
         </div>
