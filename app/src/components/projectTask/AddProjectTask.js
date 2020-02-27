@@ -12,10 +12,21 @@ import {Link} from "react-router-dom";
         }
 
         this.onChange=this.onChange.bind(this);
+        this.onSubmit=this.onSubmit.bind(this);
     }
 
     onChange(event){
        this.setState({[event.target.name]: event.target.value})
+    }
+
+    onSubmit(event){
+        event.preventDefault();
+        const newProjectTask = {
+            summary: this.state.summary,
+            acceptanceCriteria: this.state.acceptanceCriteria,
+            status: this.state.status
+        };
+        console.log(newProjectTask);
     }
 
 
@@ -29,7 +40,7 @@ import {Link} from "react-router-dom";
                         Back to Board
                     </Link>
                     <h4 className="display-4 text-center">Add /Update Project Task</h4>
-                    <form>
+                    <form onSubmit = {this.onSubmit}>
                         <div className="form-group">
                             <input type="text" className="form-control form-control-lg" name="summary"    value={this.state.summary} placeholder="Project Task summary" 
                             onChange={this.onChange}/>
