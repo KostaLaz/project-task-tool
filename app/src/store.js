@@ -1,6 +1,6 @@
-import{createStore, applyMiddlewire, compose} from 'redux';
+import{createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
-import rootReducers from "./reducers";
+import rootReducer from "./reducers";
 
 
 const initialState = {};
@@ -13,9 +13,10 @@ if(window.navigator.userAgent.includes("Chrome") && reactReduxDevTools){
         rootReducer, 
         initialState, 
         compose(
-            applyMiddlewire(...middleWare),
+            applyMiddleware(...middleWare),
             reactReduxDevTools
         )
     );
 }
+export default store;
 
