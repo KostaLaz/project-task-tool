@@ -5,18 +5,21 @@ import rootReducer from "./reducers";
 
 const initialState = {};
 const middleWare = {thunk};
-const reactReduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+const ReactReduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 let store;
 
-if(window.navigator.userAgent.includes("Chrome") && reactReduxDevTools){
+if(window.navigator.userAgent.includes("Chrome") && ReactReduxDevTools){
     store = createStore(
         rootReducer, 
         initialState, 
-        compose(
-            applyMiddleware(...middleWare),
-            reactReduxDevTools
-        )
-    );
+        compose(applyMiddleware(...middleWare),ReactReduxDevTools)
+    )
+}else{
+    store = createStore (
+        rootReducer,
+        initialState,
+        compose(applyMiddleware(...middleWare))
+    )
 }
 export default store;
 

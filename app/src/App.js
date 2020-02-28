@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import './App.css';
 import NavBar from './components/NavBar';
 import ProjectBoard from './components/ProjectBoard';
-import {Route, BrowserRouter, Switch} from 'react-router-dom';
+import {Route, BrowserRouter} from 'react-router-dom';
 import AddProjectTask from './components/projectTask/AddProjectTask';
 import {Provider} from 'react-redux';
 import store from './store';
