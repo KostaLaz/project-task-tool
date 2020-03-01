@@ -1,0 +1,1 @@
+export const GET_ERORS = "GET_ERORS";
