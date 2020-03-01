@@ -1,5 +1,5 @@
 import axios from "axios";
-import {GET_ERRORS, GET_ERORS} from "./types";
+import {GET_ERRORS, GET_ERORS, GET_PROJECT_TASKS} from "./types";
 
 export const addProjectTask = (project_task, history) => async dispatch => {
     try {
@@ -17,3 +17,11 @@ export const addProjectTask = (project_task, history) => async dispatch => {
     }
   
 };
+
+export const getBacklog = () => async dispatch =>{
+    const response = await axios.get("http://localhost:8080/api/board/all")
+    dispatch({
+        type: GET_PROJECT_TASKS,
+        payLoad: response.data
+    })
+}
