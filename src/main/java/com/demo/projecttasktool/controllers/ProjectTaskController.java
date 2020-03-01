@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/board")
-@CrossOrigin("")
+@CrossOrigin("http://localhost:3000")
 public class ProjectTaskController {
 
     @Autowired
