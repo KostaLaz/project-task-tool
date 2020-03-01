@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import {Link} from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import {addProjectTask} from "../../actions/projectTaskActions";
+import classnames from "classnames";
 
  class AddProjectTask extends Component {
 
@@ -26,8 +30,11 @@ import {Link} from "react-router-dom";
             acceptanceCriteria: this.state.acceptanceCriteria,
             status: this.state.status
         };
-        console.log(newProjectTask);
+        //console.log(newProjectTask);
+        this.props.addProjectTask(newProjectTask, this.props.history);
     }
+
+
 
 
     render() {
@@ -66,4 +73,16 @@ import {Link} from "react-router-dom";
     }
 }
 
-export default AddProjectTask;
+AddProjectTask.propTypes = {
+    addProjectTask: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired
+  };
+  
+  const mapStateToProps = state => ({
+    errors: state.errors
+  });
+  
+  export default connect(
+    mapStateToProps,
+    { addProjectTask }) (AddProjectTask);
+ 
