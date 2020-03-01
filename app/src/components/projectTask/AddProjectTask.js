@@ -57,13 +57,19 @@ class AddProjectTask extends Component {
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg",
+                    {"is-invalid": errors.summary}
+                    )}
                     name="summary"
                     value={this.state.summary}
                     placeholder="Project Task summary"
                     onChange={this.onChange}
                   />
-                  <p>{errors.summary}</p>
+                  {
+                      errors.summary &&(
+                          <div className="invalid-feedback">
+                              {errors.summary}
+                          </div> )}
                 </div>
                 <div className="form-group">
                   <textarea
