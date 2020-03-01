@@ -12,6 +12,37 @@ import {getBacklog} from '../actions/projectTaskActions';
     }
 
     render() {
+
+        const project_tasks = this.props.project_tasks;
+
+        let BoardContent;
+        let todoItems = [];
+        let inProgresItems = [];
+        let doneItems= [];
+
+        const BoardAlgorithm = project_tasks => {
+            if (project_tasks.length < 1) {
+              return (
+                <div className="alert alert-info text-center" role="alert">
+                  No Project Tasks on this board
+                </div>
+              );
+            } else {
+              const tasks = project_tasks.map(project_task => (
+                <ProjectTaskItem key={project_task.id} project_task={project_task} />
+              ));
+      
+      
+
+                    for(let i = 0; i < tasks.length; i++){
+                        console.log(tasks[i]);
+                    }
+
+
+            }
+        }
+        BoardAlgorithm(project_tasks);
+
         return (
             <div>
                <div className="container">
@@ -33,7 +64,7 @@ import {getBacklog} from '../actions/projectTaskActions';
                     {
                     //SAMPLE PROJECT TASK STARTS HERE
                     }
-                        <ProjectTaskItem/>
+                        
 
                     {//SAMPLE PROJECT TASK ENDS HERE 
                     }
@@ -47,7 +78,7 @@ import {getBacklog} from '../actions/projectTaskActions';
                    { // SAMPLE PROJECT TASK STARTS HERE      
                     // SAMPLE PROJECT TASK ENDS HERE
                 }
-                    <ProjectTaskItem/>
+                    
                 </div>
                 <div className="col-md-4">
                     <div className="card text-center mb-2">
