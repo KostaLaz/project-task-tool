@@ -1,128 +1,123 @@
-import React, { Component } from 'react'
-import {Link} from "react-router-dom";
-import ProjectTaskItem from './projectTask/ProjectTaskItem';
-import {connect} from "react-redux";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import ProjectTaskItem from "./projectTask/ProjectTaskItem";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import {getBacklog} from '../actions/projectTaskActions';
+import { getBacklog } from "../actions/projectTaskActions";
 
- class ProjectBoard extends Component {
+class ProjectBoard extends Component {
+  componentDidMount() {
+    this.props.getBacklog();
+  }
 
-    componentDidMount(){
-        this.props.getBacklog();
-    }
+  render() {
+    const { project_tasks } = this.props.project_tasks;
 
-    render() {
+    let BoardContent;
+    let todoItems = [];
+    let inProgresItems = [];
+    let doneItems = [];
 
-        const {project_tasks} = this.props.project_tasks
-
-        let BoardContent;
-        let todoItems = [];
-        let inProgresItems = [];
-        let doneItems = [];
-
-        const BoardAlgorithm = project_tasks => {
-            if (project_tasks.length < 1) {
-              return (
-                <div className="alert alert-info text-center" role="alert">
-                  No Project Tasks on this board
-                </div>
-              );
-            } else {
-              const tasks = project_tasks.map(project_task => (
-                <ProjectTaskItem key={project_task.id} project_task={project_task} />
-              ));
-                    for(let i = 0; i < tasks.length; i++){
-                        if(tasks[i].props.project_task.status === "TO_DO"){
-                            todoItems.push(tasks[i])
-                        }
-                        if(tasks[i].props.project_task.status === "IN_PROGRESS"){
-                            inProgresItems.push(tasks[i])
-                        }
-                        if(tasks[i].props.project_task.status === "DONE"){
-                            doneItems.push(tasks[i])
-                        }
-                    }
-            }
+    const BoardAlgorithm = project_tasks => {
+      if (project_tasks.length < 1) {
+        return (
+          <div className="alert alert-info text-center" role="alert">
+            No Project Tasks on this board
+          </div>
+        );
+      } else {
+        const tasks = project_tasks.map(project_task => (
+          <ProjectTaskItem key={project_task.id} project_task={project_task} />
+        ));
+        for (let i = 0; i < tasks.length; i++) {
+          if (tasks[i].props.project_task.status === "TO_DO") {
+            todoItems.push(tasks[i]);
+          }
+          if (tasks[i].props.project_task.status === "IN_PROGRESS") {
+            inProgresItems.push(tasks[i]);
+          }
+          if (tasks[i].props.project_task.status === "DONE") {
+            doneItems.push(tasks[i]);
+          }
         }
-
-        BoardAlgorithm(project_tasks);
-
-        
 
         return (
-            <div>
-               <div className="container">
-        <Link to="/addProjectTask" className="btn btn-primary mb-3">
-            <i className="fas fa-plus-circle"> Create Project Task</i>
-        </Link>
-        <br />
-        <hr />
-        
-        <div className="container">
-            <div className="row">
+          <React.Fragment>
+            <div className="container">
+              <div className="row">
                 <div className="col-md-4">
-                    <div className="card text-center mb-2">
-                        <div className="card-header bg-secondary text-white">
-                            <h3>TO DO</h3>
-                        </div>
+                  <div className="card text-center mb-2">
+                    <div className="card-header bg-secondary text-white">
+                      <h3>TO DO</h3>
                     </div>
+                  </div>
 
-                    {
+                  {
                     //SAMPLE PROJECT TASK STARTS HERE
-                    }
-                        
+                  }
 
-                    {//SAMPLE PROJECT TASK ENDS HERE 
-                    }
-                    {todoItems}
+                  {
+                    //SAMPLE PROJECT TASK ENDS HERE
+                  }
+                  {todoItems}
                 </div>
                 <div className="col-md-4">
-                    <div className="card text-center mb-2">
-                        <div className="card-header bg-primary text-white">
-                            <h3>In Progress</h3>
-                        </div>
+                  <div className="card text-center mb-2">
+                    <div className="card-header bg-primary text-white">
+                      <h3>In Progress</h3>
                     </div>
-                   { // SAMPLE PROJECT TASK STARTS HERE      
+                  </div>
+                  {
+                    // SAMPLE PROJECT TASK STARTS HERE
                     // SAMPLE PROJECT TASK ENDS HERE
-                }
-                {inProgresItems}
-                    
+                  }
+                  {inProgresItems}
                 </div>
                 <div className="col-md-4">
-                    <div className="card text-center mb-2">
-                        <div className="card-header bg-success text-white">
-                            <h3>Done</h3>
-                        </div>
+                  <div className="card text-center mb-2">
+                    <div className="card-header bg-success text-white">
+                      <h3>Done</h3>
                     </div>
-                    {doneItems}
-                   {/* { <!-- SAMPLE PROJECT TASK STARTS HERE -->
+                  </div>
+                  {doneItems}
+                  {/* { <!-- SAMPLE PROJECT TASK STARTS HERE -->
 
                     <!-- SAMPLE PROJECT TASK ENDS HERE -->} */}
-                     
                 </div>
+              </div>
             </div>
-          
-        </div>
 
-        {//{<!-- Backlog ENDS HERE
-        }
-    </div>
- 
-            </div>
-        )
-    }
+            {
+              //{<!-- Backlog ENDS HERE
+            }
+          </React.Fragment>
+        );
+      }
+    };
+
+    BoardAlgorithm(project_tasks);
+
+    return (
+      <div>
+        <div className="container">
+          <Link to="/addProjectTask" className="btn btn-primary mb-3">
+            <i className="fas fa-plus-circle"> Create Project Task</i>
+          </Link>
+          <br />
+          <hr />
+        </div>
+      </div>
+    );
+  }
 }
 
 ProjectBoard.propTypes = {
-    getBacklog: PropTypes.func.isRequired,
-    project_tasks: PropTypes.object.isRequired
-  };
-  
-  const mapStateToProps = state => ({
-    project_tasks: state.project_task
-  });
-  
-  export default connect(
-    mapStateToProps,
-    { getBacklog }
-  )(ProjectBoard);
+  getBacklog: PropTypes.func.isRequired,
+  project_tasks: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  project_tasks: state.project_task
+});
+
+export default connect(mapStateToProps, { getBacklog })(ProjectBoard);
