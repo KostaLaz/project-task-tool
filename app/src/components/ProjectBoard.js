@@ -52,14 +52,8 @@ class ProjectBoard extends Component {
                     </div>
                   </div>
 
-                  {
-                    //SAMPLE PROJECT TASK STARTS HERE
-                  }
-
-                  {
-                    //SAMPLE PROJECT TASK ENDS HERE
-                  }
                   {todoItems}
+
                 </div>
                 <div className="col-md-4">
                   <div className="card text-center mb-2">
@@ -67,11 +61,9 @@ class ProjectBoard extends Component {
                       <h3>In Progress</h3>
                     </div>
                   </div>
-                  {
-                    // SAMPLE PROJECT TASK STARTS HERE
-                    // SAMPLE PROJECT TASK ENDS HERE
-                  }
+                 
                   {inProgresItems}
+
                 </div>
                 <div className="col-md-4">
                   <div className="card text-center mb-2">
@@ -79,23 +71,19 @@ class ProjectBoard extends Component {
                       <h3>Done</h3>
                     </div>
                   </div>
-                  {doneItems}
-                  {/* { <!-- SAMPLE PROJECT TASK STARTS HERE -->
 
-                    <!-- SAMPLE PROJECT TASK ENDS HERE -->} */}
+                  {doneItems}
+    
                 </div>
               </div>
             </div>
 
-            {
-              //{<!-- Backlog ENDS HERE
-            }
           </React.Fragment>
         );
       }
     };
 
-    BoardAlgorithm(project_tasks);
+     BoardContent = BoardAlgorithm(project_tasks);
 
     return (
       <div>
@@ -105,6 +93,7 @@ class ProjectBoard extends Component {
           </Link>
           <br />
           <hr />
+          {BoardContent}
         </div>
       </div>
     );
