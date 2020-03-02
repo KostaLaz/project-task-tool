@@ -25,14 +25,14 @@ export const getBacklog = () => async dispatch => {
   });
 };
 
-export const deleteProjectTask = id => async dispatch =>{
+export const deleteProjectTask = id => async dispatch => {
   if(
-    window.confirm(`You are deleting project task ${id}`)
+    window.confirm(`You are deleting project task ${id}, this action can not be undone.`)
     )
   {
   await axios.delete(`http://localhost:8080/api/board/${id}`);
   dispatch({
-    type: "DELETE_PROJECT_TASK",
+    type: DELETE_PROJECT_TASKS,
     payLoad: id
   });
   }

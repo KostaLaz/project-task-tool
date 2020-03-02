@@ -36,6 +36,6 @@ import {deleteProjectTask} from "../../actions/projectTaskActions";
 
 ProjectTaskItem.propTypes={
     deleteProjectTask: PropTypes.func.isRequired
-}
+};
 
 export default connect(null, {deleteProjectTask}) (ProjectTaskItem);
