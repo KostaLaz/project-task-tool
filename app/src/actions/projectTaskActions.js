@@ -24,4 +24,5 @@ export const getBacklog = () => async dispatch =>{
         type: GET_PROJECT_TASKS,
         payLoad: response.data
     })
+    console.log("OD ACTIONSSSSSS")
 }

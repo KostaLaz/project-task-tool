@@ -13,35 +13,8 @@ import {getBacklog} from '../actions/projectTaskActions';
 
     render() {
 
-        const project_tasks = this.props.project_tasks;
-
-        let BoardContent;
-        let todoItems = [];
-        let inProgresItems = [];
-        let doneItems= [];
-
-        const BoardAlgorithm = project_tasks => {
-            if (project_tasks.length < 1) {
-              return (
-                <div className="alert alert-info text-center" role="alert">
-                  No Project Tasks on this board
-                </div>
-              );
-            } else {
-              const tasks = project_tasks.map(project_task => (
-                <ProjectTaskItem key={project_task.id} project_task={project_task} />
-              ));
-      
-      
-
-                    for(let i = 0; i < tasks.length; i++){
-                        console.log(tasks[i]);
-                    }
-
-
-            }
-        }
-        BoardAlgorithm(project_tasks);
+        const {project_tasks} = this.props.project_tasks
+        
 
         return (
             <div>
@@ -103,13 +76,16 @@ import {getBacklog} from '../actions/projectTaskActions';
     }
 }
 
-ProjectBoard.propTypes= {
+ProjectBoard.propTypes = {
     getBacklog: PropTypes.func.isRequired,
     project_tasks: PropTypes.object.isRequired
   };
-
-const mapStateToProps = state => ({
+  
+  const mapStateToProps = state => ({
     project_tasks: state.project_task
-})
-
-export default connect (null, {getBacklog}) (ProjectBoard);
+  });
+  
+  export default connect(
+    mapStateToProps,
+    { getBacklog }
+  )(ProjectBoard);
