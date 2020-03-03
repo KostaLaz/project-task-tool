@@ -20,9 +20,9 @@ import {deleteProjectTask} from "../../actions/projectTaskActions";
           <p className="card-text text-truncate ">
             {project_task.acceptanceCriteria}
           </p>
-                <a href="" className="btn btn-primary">
+                <Link to={`/updateProjectTask/${project_task.id}`} className="btn btn-primary">
                     View / Update
-                </a>
+                </Link>
             
                 <button className="btn btn-danger ml-4"
                 onClick={this.onDeleteClick.bind(this, project_task.id)}>
