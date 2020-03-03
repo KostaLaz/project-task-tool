@@ -7,6 +7,7 @@ import {Route, BrowserRouter} from 'react-router-dom';
 import AddProjectTask from './components/projectTask/AddProjectTask';
 import {Provider} from 'react-redux';
 import store from './store';
+import UpdateProjectTask from './components/projectTask/UpdateProjectTask';
 
 
 class App extends Component {
@@ -17,8 +18,13 @@ class App extends Component {
     <div className="App">
 
      <NavBar/>
+
      <Route exact path="/" component={ProjectBoard}/>
+
      <Route exact path="/addProjectTask" component={AddProjectTask}/>
+
+     <Route exact path="/updateProjectTask/:pt_id" component={UpdateProjectTask} />
+     
     </div> 
     </BrowserRouter>
     </Provider>

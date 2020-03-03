@@ -6,6 +6,14 @@ import PropTypes from "prop-types";
 import {getProjectTask} from "../../actions/projectTaskActions";
 
  class UpdateProjectTask extends Component {
+
+    componentDidMount(){
+        const {id} = this.props.match.params;
+        console.log(this.props.match.params+ "!!!!!!!!!!!!!!!");
+
+        this.props.getProjectTask(id);
+    }
+
     render() {
         return (
             <div className="addProjectTask">
@@ -41,15 +49,15 @@ import {getProjectTask} from "../../actions/projectTaskActions";
     }
 }
 
-UpdateProjectTask.PropTypes = {
+UpdateProjectTask.propTypes = {
     project_task: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
     getProjectTask: PropTypes.func.isRequired
-}
+};
 
 const mapStateToProps = state => ({
     project_task: state.project_task,
     errors: state.errors
-})
+});
 
-export default connect (mapStateToProps, getProjectTask ) (UpdateProjectTask);
+export default connect (mapStateToProps, {getProjectTask}) (UpdateProjectTask);
