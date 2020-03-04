@@ -20,9 +20,9 @@ import {getProjectTask} from "../../actions/projectTaskActions";
         <div className="container">
             <div className="row">
                 <div className="col-md-8 m-auto">
-                    <a href="/ProjectBoard.html" className="btn btn-light">
+                    <Link to="/" className="btn btn-light">
                         Back to Board
-                    </a>
+                    </Link>
                     <h4 className="display-4 text-center">Add /Update Project Task</h4>
                     <form>
                         <div className="form-group">
