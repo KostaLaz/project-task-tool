@@ -12,6 +12,7 @@ import {deleteProjectTask} from "../../actions/projectTaskActions";
 
     render() {
         const {project_task} = this.props;
+        
         return (
             <div className="card mb-1 bg-light">
         <div className="card-header text-primary">ID: {project_task.id}</div>

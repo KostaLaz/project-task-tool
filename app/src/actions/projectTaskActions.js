@@ -43,7 +43,7 @@ export const getProjectTask = (id, history) => async dispatch => {
     console.log(id);
     const res = await axios.get(`http://localhost:8080/api/board/${id}`);
     console.log("BBBBBBB");
-    console.log("GET" + GET_PROJECT_TASK);
+    console.log("GET " + GET_PROJECT_TASK);
     console.log("RES>DATA" + res.data);
     dispatch({
       type: GET_PROJECT_TASK,
@@ -53,6 +53,6 @@ export const getProjectTask = (id, history) => async dispatch => {
     console.log("ERR " + error)
     console.log("HIS " + history)
 
-    //history.push("/");
+    history.push("/");
   }
 };
