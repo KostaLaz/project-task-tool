@@ -16,6 +16,8 @@ class UpdateProjectTask extends Component {
       errors: {}
     } 
     this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+
   }
   
   componentDidCatch(){
@@ -37,6 +39,17 @@ class UpdateProjectTask extends Component {
       acceptanceCriteria,
       status
     });
+  }
+
+  onSubmit(event){
+    event.preventDefault();
+    const updatedTask = {
+      id: this.state.id,
+      summary: this.state.summary,
+      acceptanceCriteria: this.state.acceptanceCriteria,
+      status: this.state.status,
+    };
+    this.props.addProjectTask(updatedTask, this.props.history);
   }
 
   onChange(event){
