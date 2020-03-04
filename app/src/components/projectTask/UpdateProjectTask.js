@@ -16,6 +16,7 @@ import {getProjectTask} from "../../actions/projectTaskActions";
             status: "",
             errors: {}
         }
+        this.onChange = this.onChange.bind(this);
     }
 
     componentDidMount(){
@@ -23,6 +24,10 @@ import {getProjectTask} from "../../actions/projectTaskActions";
         console.log(this.props.match.params+ "!!!!!!!!!!!!!!!");
 
         this.props.getProjectTask(id);
+    }
+
+    onChange(event){
+        this.setState({[event.target.name]: event.target.value})
     }
 
     render() {
@@ -38,13 +43,15 @@ import {getProjectTask} from "../../actions/projectTaskActions";
                     <form>
                         <div className="form-group">
                             <input type="text" className="form-control form-control-lg" name="summary" 
-                            value={this.state.summary}placeholder="Project Task summary" />
+                            value={this.state.summary}placeholder="Project Task summary" 
+                            onChange={this.onChange}/>
                         </div>
                         <div className="form-group">
-                            <textarea className="form-control form-control-lg" placeholder="Acceptance Criteria" name="acceptanceCriteria" value={this.state.acceptanceCriteria}></textarea>
+                            <textarea className="form-control form-control-lg" placeholder="Acceptance Criteria" name="acceptanceCriteria" value={this.state.acceptanceCriteria}
+                             onChange={this.onChange}></textarea>
                         </div>
                         <div className="form-group">
-                            <select className="form-control form-control-lg" name="status" value={this.state.status}>
+                            <select className="form-control form-control-lg" name="status" value={this.state.status}  onChange={this.onChange}>
                                 <option value="">Select Status</option>
                                 <option value="TO_DO">TO DO</option>
                                 <option value="IN_PROGRESS">IN PROGRESS</option>
