@@ -5,8 +5,7 @@ import PropTypes from "prop-types";
 import {getProjectTask, addProjectTask} from "../../actions/projectTaskActions";
 
 class UpdateProjectTask extends Component {
-
-  constructor(){
+  constructor() {
     super();
     this.state = {
       id: "",
@@ -14,26 +13,19 @@ class UpdateProjectTask extends Component {
       acceptanceCriteria: "",
       status: "",
       errors: {}
-    } 
+    };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-
-  }
-  
-  componentDidCatch(){
-    const {id} = this.props.match.params;
-    this.props.getProjectTask(id);
   }
 
-  componentWillReceiveProps(nextProps){
-    const {
-      id,
-      summary,
-      acceptanceCriteria,
-      status
-    } = nextProps.project_task;
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
 
-    this.setState ({
+    const { id, summary, acceptanceCriteria, status } = nextProps.project_task;
+
+    this.setState({
       id,
       summary,
       acceptanceCriteria,
@@ -41,26 +33,28 @@ class UpdateProjectTask extends Component {
     });
   }
 
-  onSubmit(event){
-    event.preventDefault();
+  componentDidMount() {
+    const {id} = this.props.match.params;
+    this.props.getProjectTask(id);
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
     const updatedTask = {
       id: this.state.id,
       summary: this.state.summary,
       acceptanceCriteria: this.state.acceptanceCriteria,
-      status: this.state.status,
+      status: this.state.status
     };
+
     this.props.addProjectTask(updatedTask, this.props.history);
   }
 
-  onChange(event){
-    this.setState = ({[event.target.name]: event.target.value})
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
-
-
   render() {
-    
-    
-
+    const { errors } = this.state;
     return (
       <div className="addProjectTask">
         <div className="container">
@@ -76,12 +70,17 @@ class UpdateProjectTask extends Component {
                 <div className="form-group">
                   <input
                     type="text"
-                    className={classnames("form-control form-control-lg")}
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.summary
+                    })}
                     name="summary"
                     placeholder="Project Task summary"
                     value={this.state.summary}
-                    onChange = {this.onChange}
+                    onChange={this.onChange}
                   />
+                  {errors.summary && (
+                    <div className="invalid-feedback">{errors.summary}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <textarea
@@ -89,7 +88,7 @@ class UpdateProjectTask extends Component {
                     placeholder="Acceptance Criteria"
                     name="acceptanceCriteria"
                     value={this.state.acceptanceCriteria}
-                    onChange = {this.onChange}
+                    onChange={this.onChange}
                   />
                 </div>
                 <div className="form-group">
@@ -97,7 +96,7 @@ class UpdateProjectTask extends Component {
                     className="form-control form-control-lg"
                     name="status"
                     value={this.state.status}
-                    onChange = {this.onChange}
+                    onChange={this.onChange}
                   >
                     <option value="">Select Status</option>
                     <option value="TO_DO">TO DO</option>
